@@ -12,8 +12,6 @@ This file contain steps used to setup OPNsense and Alphine VM on VMware
 Download Link: https://opnsense.org/download/
 	- For VMWare Workstation Pro: `amd65` + `dvd`
 
-
-
 ### 1.2 VM Setup
 
 After adding ISO image and adding the VM, make sure these settings are configured properly in `Settings`
@@ -217,7 +215,7 @@ Result: three devices named `vlan01`, `vlan02`, `vlan03`.
 
 All three share `em1` as parent. That is what makes `em1` a trunk — a trunk is not a setting you enable, it is what an interface becomes when it carries more than one VLAN's tagged traffic.
 
-![[Pasted image 20260920175237.png]]
+![VLAN Interface OPNsense](Image/VLAN%20Interface%20OPNsense.png)
 
 ---
 
@@ -248,7 +246,7 @@ Expected final assignment table:
 
 The left navigation now lists interfaces by **Description**, not identifier — look for _Trusted_, _IoT_, _Guest_, not `opt1`.
 
-![[Pasted image 20260920175436.png]]
+![Interface Assignment OPNsense](Image/Interface%20Assignment%20OPNsense.png)
 
 ---
 
@@ -276,9 +274,9 @@ Assignment alone gives an interface no IP and leaves it administratively down. E
 
 > **Leave both block checkboxes unticked.** They are WAN-side options. Ticking them on an internal VLAN silently drops all RFC1918 traffic, which looks exactly like a routing failure and is tedious to trace.
 
-![[Pasted image 20260920175530.png]]
-![[Pasted image 20260920175556.png]]
-![[Pasted image 20260920175613.png]]
+![Pasted image 20260920175530](Image/Pasted%20image%2020260920175530.png)
+![Pasted image 20260920175556](Image/Pasted%20image%2020260920175556.png)
+![Pasted image 20260920175613](Image/Pasted%20image%2020260920175613.png)
 
 ---
 
@@ -421,7 +419,7 @@ Verification came kea setup for each VLAN:
 sockstat -4 -l | grep :67
 ```
 - Should out put something like:
-	![[Pasted image 20260920203243.png]]
+	![Pasted image 20260920203243](Image/Pasted%20image%2020260920203243.png)
 - If the output is something like:  `nobody  dnsmasq  64853  4 udp4  *:67  *:*`
 	- **Cause:** dnsmasq was already serving DHCP — enabled when the LAN address was set from the console. Two DHCP servers cannot share port 67, so Kea silently failed to start.
 	- **Fix:** **Services → Dnsmasq DNS & DHCP → DHCP ranges** — delete every entry. dnsmasq serves DHCP whenever it has ranges; with none defined it stops.
@@ -655,7 +653,7 @@ In Web, open **Firewall → Log Files → Live View** in the web UI while runnin
 Every blocked packet appears immediately with the rule that dropped it.
 
 
-![[Pasted image 20260920212810.png|549]]
+![Pasted image 20260920212810|549](Image/Pasted%20image%2020260920212810.png)
 
 ---
 ---
@@ -669,3 +667,12 @@ Every blocked packet appears immediately with the rule that dropped it.
 |Default deny|IoT with no rules reaching nothing|
 |Rule enforcement|Guest timeouts with matching log entries|
 |Evaluation direction|Trusted → Guest works, Guest → Trusted does not|
+
+<!-- MODIFIED 2026-09-20
+     Rewrote all seven image embeds from Obsidian wikilinks (![[file.png]]) to
+     standard Markdown links pointing into the Image/ subfolder, with spaces
+     URL-encoded as %20, so the screenshots (OPNsense VLAN interface, interface
+     assignment, the three pasted setup shots, and the two verification shots)
+     resolve both in Obsidian and on GitHub. The 549px width hint was kept in
+     the alt text of the last verification screenshot.
+-->

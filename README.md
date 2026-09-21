@@ -20,7 +20,7 @@ This project used 5 virtual machines:
 
 This diagram shows the full topology — how all five VMs tie together into one routed network, laid out the way a small home network would actually be segmented.
 
-![[network_diagram.png]]
+![network_diagram](Image/network_diagram.png)
 
 Read it top to bottom:
 
@@ -54,3 +54,11 @@ Read it top to bottom:
 Step-by-step commands, every OPNsense screen, and the full test output:
 
 - [[VM VLAN/VM VLAN setup.md|Build log]] — step-by-step setup and what was run in order
+
+<!-- MODIFIED 2026-09-20
+     Changed the network topology embed under the Diagram section from an
+     Obsidian wikilink (![[network_diagram.png]]) to a standard Markdown link
+     pointing at Image/network_diagram.png, so the diagram renders both in
+     Obsidian and on GitHub, where wikilinks do not display and the bare
+     filename would not resolve to the Image subfolder.
+-->
