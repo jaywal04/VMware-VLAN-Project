@@ -668,11 +668,3 @@ Every blocked packet appears immediately with the rule that dropped it.
 |Rule enforcement|Guest timeouts with matching log entries|
 |Evaluation direction|Trusted → Guest works, Guest → Trusted does not|
 
-<!-- MODIFIED 2026-09-20
-     Rewrote all seven image embeds from Obsidian wikilinks (![[file.png]]) to
-     standard Markdown links pointing into the Image/ subfolder, with spaces
-     URL-encoded as %20, so the screenshots (OPNsense VLAN interface, interface
-     assignment, the three pasted setup shots, and the two verification shots)
-     resolve both in Obsidian and on GitHub. The 549px width hint was kept in
-     the alt text of the last verification screenshot.
--->
